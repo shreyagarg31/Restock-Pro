@@ -6,9 +6,12 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.restock-pro.com',
+
   vite: {
     plugins: [tailwindcss()],
     resolve: {
@@ -17,5 +20,7 @@ export default defineConfig({
       },
     },
   },
+
   integrations: [react(), mdx(), sitemap()],
+  adapter: cloudflare(),
 });
