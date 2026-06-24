@@ -46,3 +46,6 @@ hilarious-heliosphere/
 .cursor/*
 !.cursor/skills/
 !.cursor/skills/**
+
+.dev.vars*
+!.dev.vars.example
