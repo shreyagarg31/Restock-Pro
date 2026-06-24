@@ -1,5 +1,5 @@
 {
-  "name": "hilarious-heliosphere",
+  "name": "restock-pro-ui",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -12,6 +12,19 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.0.2"
+    "@astrojs/mdx": "^7.0.0",
+    "@astrojs/react": "^6.0.0",
+    "@astrojs/sitemap": "^3.7.3",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^7.0.2",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.41.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.1"
   }
 }

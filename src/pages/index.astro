@@ -1,17 +1,84 @@
 ---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import InstallCTA from '@/components/InstallCTA.astro';
+import { HeroSection } from '@/components/react/HeroSection';
+import { LogoMarquee } from '@/components/react/LogoMarquee';
+import { PrinciplesGrid } from '@/components/react/PrinciplesGrid';
+import { FeatureBento } from '@/components/react/FeatureBento';
+import { NumberTicker } from '@/components/react/NumberTicker';
+import { FaqAccordion } from '@/components/react/FaqAccordion';
+import { ScrollReveal } from '@/components/react/ScrollReveal';
+import { buildMeta } from '@/lib/seo';
+import { SITE_NAME, SITE_URL } from '@/lib/constants';
 
+const meta = buildMeta({
+  title: SITE_NAME,
+  description:
+    'Back-in-stock notifications for Shopify. Capture demand with a Notify Me widget and send automatic restock emails.',
+  path: '/',
+});
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: SITE_NAME,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Shopify',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    url: SITE_URL,
+    description: meta.description,
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout {...meta} jsonLd={jsonLd}>
+  <HeroSection client:load />
+  <LogoMarquee client:visible />
+  <PrinciplesGrid client:visible />
+  <FeatureBento client:visible />
+
+  <section class="bg-base px-4 py-20 sm:px-6">
+    <ScrollReveal client:visible>
+      <div class="mx-auto max-w-6xl text-center">
+        <h2 class="section-title">Why merchants choose Restock Pro</h2>
+        <p class="section-lead mx-auto mt-4 max-w-2xl">
+          Stockouts are inevitable. Losing the sale doesn't have to be.
+        </p>
+      </div>
+    </ScrollReveal>
+    <div class="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-3">
+      <NumberTicker
+        client:visible
+        value="24/7"
+        label="Demand capture"
+        description="Collect emails around the clock on sold-out products."
+      />
+      <NumberTicker
+        client:visible
+        value="5 min"
+        label="Setup time"
+        description="Install, enable the theme extension, and go live."
+      />
+      <NumberTicker
+        client:visible
+        value="100%"
+        label="Automated"
+        description="Restock emails send when inventory updates — no manual work."
+      />
+    </div>
+  </section>
+
+  <section class="bg-base px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-3xl">
+      <ScrollReveal client:visible>
+        <h2 class="section-title text-center">Frequently asked questions</h2>
+      </ScrollReveal>
+      <div class="mt-10">
+        <FaqAccordion client:visible />
+      </div>
+    </div>
+  </section>
+
+  <InstallCTA />
+</BaseLayout>

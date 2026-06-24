@@ -1,0 +1,107 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import InstallCTA from '@/components/InstallCTA.astro';
+import { buildMeta } from '@/lib/seo';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  tags: string[];
+  jsonLd: Record<string, unknown> | Record<string, unknown>[];
+  relatedPosts?: CollectionEntry<'blog'>[];
+}
+
+const {
+  title,
+  description,
+  path,
+  pubDate,
+  updatedDate,
+  tags,
+  jsonLd,
+  relatedPosts = [],
+} = Astro.props;
+const meta = buildMeta({ title, description, path });
+const modified = updatedDate ?? pubDate;
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  {...meta}
+  jsonLd={jsonLd}
+  ogType="article"
+  articlePublishedTime={pubDate.toISOString()}
+  articleModifiedTime={modified.toISOString()}
+  articleTags={tags}
+>
+  <article class="bg-base">
+    <header class="border-b hairline px-4 py-16 sm:px-6">
+      <div class="mx-auto max-w-3xl">
+        <a href="/blog" class="text-link">← Back to blog</a>
+        <h1 class="page-title mt-6">{title}</h1>
+        <p class="section-lead mt-4">{description}</p>
+        <div class="text-meta mt-6 flex flex-wrap items-center gap-3">
+          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+          {
+            updatedDate && (
+              <span>· Updated {updatedDate.toLocaleDateString('en-US')}</span>
+            )
+          }
+        </div>
+        {
+          tags.length > 0 && (
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <li class="rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-1 text-xs text-brand-300">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+    </header>
+
+    <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+      <div class="prose prose-invert prose-invert-custom max-w-none prose-headings:font-serif prose-headings:font-normal prose-headings:text-white prose-p:text-text-muted prose-a:text-brand-300 prose-li:text-text-muted">
+        <slot />
+      </div>
+    </div>
+
+    {
+      relatedPosts.length > 0 && (
+        <aside class="border-t hairline px-4 py-12 sm:px-6">
+          <div class="mx-auto max-w-3xl">
+            <h2 class="subsection-title">Related articles</h2>
+            <ul class="mt-6 space-y-4">
+              {relatedPosts.map((related) => (
+                <li>
+                  <a
+                    href={`/blog/${related.id}`}
+                    class="group block rounded-xl border hairline p-4 transition hover:border-brand-500/40 hover:bg-elevated/50"
+                  >
+                    <p class="card-title text-lg group-hover:text-brand-300">{related.data.title}</p>
+                    <p class="card-body mt-1">{related.data.description}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+      )
+    }
+  </article>
+
+  <InstallCTA
+    title="Capture demand before your next restock"
+    description="Add a Notify Me widget to out-of-stock products and email customers automatically when inventory returns."
+  />
+</BaseLayout>

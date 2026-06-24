@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#07080F"/>
+      <stop offset="50%" stop-color="#12102a"/>
+      <stop offset="100%" stop-color="#1a0f2e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4A6CF7"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="900" cy="200" r="200" fill="#7C5CFC" opacity="0.15"/>
+  <circle cx="300" cy="500" r="150" fill="#4A6CF7" opacity="0.12"/>
+  <text x="80" y="280" font-family="Georgia,serif" font-size="72" font-weight="400" fill="#F4F4F5">Restock Pro</text>
+  <text x="80" y="360" font-family="system-ui,sans-serif" font-size="32" fill="#94A3B8">Back-in-stock notifications for Shopify</text>
+  <rect x="80" y="400" width="280" height="56" rx="28" fill="url(#accent)"/>
+  <text x="220" y="435" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" font-weight="600" fill="#fff">Install free</text>
+</svg>

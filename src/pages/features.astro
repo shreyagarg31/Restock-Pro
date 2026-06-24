@@ -1,0 +1,82 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import InstallCTA from '@/components/InstallCTA.astro';
+import { ScrollReveal } from '@/components/react/ScrollReveal';
+import { buildMeta } from '@/lib/seo';
+
+const meta = buildMeta({
+  title: 'Features',
+  description:
+    'Notify Me widget, automated restock emails, subscriber dashboard, demand insights, and CSV exports for Shopify merchants.',
+  path: '/features',
+});
+
+const features = [
+  {
+    title: 'Notify Me widget',
+    description:
+      'A theme app extension that appears on out-of-stock product pages. Customers enter their email and subscribe in seconds — no account required.',
+    bullets: ['Matches your storefront theme', 'One-click theme editor setup', 'Works on mobile and desktop'],
+  },
+  {
+    title: 'Automated restock emails',
+    description:
+      'When inventory returns, Restock Pro queues and sends notification emails automatically. No spreadsheets, no manual sends.',
+    bullets: ['Webhook-driven inventory detection', 'Reliable email delivery', 'Unsubscribe links included'],
+  },
+  {
+    title: 'Subscriber management',
+    description:
+      'View every customer waiting for a restock. Filter by product, export to CSV, and understand what your audience wants most.',
+    bullets: ['Centralized subscriber list', 'CSV export', 'Per-product demand view'],
+  },
+  {
+    title: 'Demand analytics',
+    description:
+      'See which products generate the most back-in-stock interest. Use demand signals to inform purchasing and replenishment.',
+    bullets: ['Product-level interest tracking', 'Activity logs', 'Actionable restock insights'],
+  },
+];
+---
+
+<BaseLayout {...meta}>
+  <section class="border-b hairline px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="page-title">Features</h1>
+      <p class="section-lead mt-4">
+        Everything you need to capture demand during stockouts and convert it when inventory
+        returns.
+      </p>
+    </div>
+  </section>
+
+  <section class="px-4 py-16 sm:px-6">
+    <div class="mx-auto max-w-4xl space-y-20">
+      {
+        features.map((feature, i) => (
+          <ScrollReveal client:visible delay={i * 0.05}>
+            <article class:list={['grid gap-8 md:grid-cols-2 md:items-center', i % 2 === 1 && 'md:[&>*:first-child]:order-2']}>
+              <div>
+                <h2 class="subsection-title">{feature.title}</h2>
+                <p class="body-text mt-3">{feature.description}</p>
+                <ul class="mt-4 space-y-2">
+                  {feature.bullets.map((b) => (
+                    <li class="card-body flex items-start gap-2">
+                      <span class="mt-0.5 text-brand-400">✓</span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="glass-card glow-brand p-8">
+                <div class="aspect-video rounded-xl bg-white/5" />
+              </div>
+            </article>
+          </ScrollReveal>
+        ))
+      }
+    </div>
+  </section>
+
+  <InstallCTA />
+</BaseLayout>

@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import InstallCTA from '@/components/InstallCTA.astro';
+import { ShimmerButton } from '@/components/react/ShimmerButton';
+import { buildMeta } from '@/lib/seo';
+import { APP_INSTALL_URL } from '@/lib/constants';
+
+const meta = buildMeta({
+  title: 'Pricing',
+  description:
+    'Restock Pro is free during beta. Full access to restock emails, subscriber management, and exports for Shopify merchants.',
+  path: '/pricing',
+});
+---
+
+<BaseLayout {...meta}>
+  <section class="border-b hairline px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="page-title">Simple pricing</h1>
+      <p class="section-lead mt-4">
+        Start free during beta. Paid tiers with advanced customization coming later.
+      </p>
+    </div>
+  </section>
+
+  <section class="px-4 py-16 sm:px-6">
+    <div class="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
+      <div class="relative rounded-2xl border-2 border-brand-500/60 bg-elevated p-8 glow-brand">
+        <span class="absolute -top-3 left-6 rounded-full bg-brand-gradient px-3 py-1 text-xs font-medium text-white">
+          CURRENT
+        </span>
+        <h2 class="subsection-title">Free Beta</h2>
+        <p class="price-display mt-2">
+          $0<span class="text-lg font-normal text-text-muted">/mo</span>
+        </p>
+        <p class="body-text mt-4">
+          Full access while we refine the product with early merchants.
+        </p>
+        <ul class="card-body mt-6 space-y-3">
+          <li>✓ Notify Me widget</li>
+          <li>✓ Unlimited restock emails</li>
+          <li>✓ Subscriber dashboard</li>
+          <li>✓ Demand insights & CSV export</li>
+        </ul>
+        <div class="mt-8">
+          <ShimmerButton client:visible href={APP_INSTALL_URL} external class="w-full !py-3">
+            Install free on Shopify
+          </ShimmerButton>
+        </div>
+      </div>
+
+      <div class="glass-card p-8">
+        <h2 class="subsection-title">Pro</h2>
+        <p class="price-display mt-2 text-text-muted/50">Coming soon</p>
+        <p class="body-text mt-4">
+          Advanced customization, branding controls, and higher-volume plans for growing stores.
+        </p>
+        <ul class="card-body mt-6 space-y-3 text-text-muted/70">
+          <li>Custom email branding</li>
+          <li>Advanced widget styling</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <InstallCTA title="Join the free beta" description="Install Restock Pro and start capturing back-in-stock demand today." />
+</BaseLayout>

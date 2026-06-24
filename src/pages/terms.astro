@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { buildMeta } from '@/lib/seo';
+import { SITE_NAME, SUPPORT_EMAIL } from '@/lib/constants';
+
+const meta = buildMeta({
+  title: 'Terms of Service',
+  description: `Terms of service for using the ${SITE_NAME} Shopify application.`,
+  path: '/terms',
+});
+---
+
+<BaseLayout {...meta}>
+  <section class="px-4 py-16 sm:px-6">
+    <div class="prose prose-invert prose-invert-custom mx-auto max-w-3xl prose-headings:font-serif prose-headings:font-normal prose-headings:text-white prose-p:text-text-muted prose-a:text-brand-300">
+      <h1 class="page-title">Terms of Service</h1>
+      <p><em>Last updated: March 15, 2026</em></p>
+      <p>
+        By installing or using {SITE_NAME}, you agree to these terms. If you do not agree, do not
+        use the application.
+      </p>
+
+      <h2>Service description</h2>
+      <p>
+        {SITE_NAME} is a Shopify app that enables merchants to collect back-in-stock subscription
+        emails and send automated restock notifications when inventory is replenished.
+      </p>
+
+      <h2>Merchant responsibilities</h2>
+      <ul>
+        <li>Comply with applicable laws, including email marketing and privacy regulations.</li>
+        <li>Obtain any required consent from customers before sending marketing communications.</li>
+        <li>Honor unsubscribe requests promptly.</li>
+        <li>Maintain accurate inventory and product data in Shopify.</li>
+      </ul>
+
+      <h2>Availability</h2>
+      <p>
+        We strive for high availability but do not guarantee uninterrupted service. Features may
+        change, especially during the free beta period.
+      </p>
+
+      <h2>Limitation of liability</h2>
+      <p>
+        To the maximum extent permitted by law, {SITE_NAME} is provided "as is" without warranties.
+        We are not liable for indirect, incidental, or consequential damages arising from use of
+        the app.
+      </p>
+
+      <h2>Termination</h2>
+      <p>
+        You may uninstall the app at any time. We may suspend or terminate access for violations of
+        these terms or abuse of the service.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions? Contact <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
