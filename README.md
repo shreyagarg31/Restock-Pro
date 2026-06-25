@@ -52,49 +52,57 @@ Your content here...
 
 Rebuild to publish. No routing code changes needed.
 
-## Deploy to Cloudflare Pages (free)
+## Deploy to Cloudflare Workers (free)
+
+This site is a static Astro build. Cloudflare reads [`wrangler.jsonc`](wrangler.jsonc) for the output directory (`./dist`).
 
 ### 1. Push to GitHub
 
 ```bash
 git add .
-git commit -m "Initial marketing site"
-git remote add origin https://github.com/YOUR_USER/Restock-Pro-UI.git
+git commit -m "Add Cloudflare Workers deploy config"
 git push -u origin main
 ```
 
-Only source files are committed — see [`.gitignore`](.gitignore). Build artifacts (`dist/`, `.astro/`, `node_modules/`) are excluded.
+### 2. Create the Workers project
 
-### 2. Create the Pages project
+[Cloudflare Dashboard](https://dash.cloudflare.com/) → **Workers & Pages** → **Create application** → **Import a repository**
 
-[Cloudflare Dashboard](https://dash.cloudflare.com/) → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
+Select **`shreyagarg31/Restock-Pro`** and use:
 
-| Setting | Value |
-|---------|-------|
+| Field | Value |
+|-------|-------|
 | Production branch | `main` |
-| Framework preset | Astro |
 | Build command | `npm run build` |
-| Build output directory | `dist` |
+| Deploy command | `npx wrangler deploy` |
 
-**Environment variable (required):**
+There is no separate “output directory” field — `wrangler.jsonc` sets `"directory": "./dist"`.
 
-| Variable | Value |
-|----------|-------|
-| `NODE_VERSION` | `22` |
+**Worker name:** use `restock-pro-ui` in the dashboard (must match `"name"` in `wrangler.jsonc`).
 
-Confirm the `*.pages.dev` preview URL loads before attaching your domain.
+**Environment variable** (after project is created):
+
+Workers & Pages → your project → **Settings** → **Variables and Secrets** → Add:
+
+| Name | Value | Type |
+|------|-------|------|
+| `NODE_VERSION` | `22` | Build |
+
+Or rely on [`.node-version`](.node-version) in the repo.
+
+Confirm the `*.workers.dev` preview URL loads before attaching your domain.
 
 ### 3. Custom domain — `www.restock-pro.com`
 
-Pages project → **Custom domains** → add `www.restock-pro.com`.
+Project → **Settings** → **Domains & Routes** (or **Custom domains**) → add `www.restock-pro.com`.
 
-This replaces the existing `www` CNAME (currently pointing at `restock-pro.com`) with your Pages hostname.
+This replaces the existing `www` CNAME (currently pointing at `restock-pro.com`) with your Workers hostname.
 
 ### Domain split (important)
 
 | Host | Purpose |
 |------|---------|
-| `www.restock-pro.com` | This marketing site (Cloudflare Pages) |
+| `www.restock-pro.com` | This marketing site (Cloudflare Workers) |
 | `restock-pro.com` (apex) | Shopify app, OAuth, `/api` routes (Render) |
 | `mail.restock-pro.com` | Resend email DNS — leave unchanged |
 
@@ -107,7 +115,9 @@ After deploy, verify:
 
 ### Ongoing deploys
 
-Every `git push` to `main` triggers a production deploy on Cloudflare Pages.
+Every `git push` to `main` triggers a production deploy via Workers Builds.
+
+**Local deploy (optional):** `npm run deploy` (requires `npx wrangler login` once).
 
 ## Configuration
 
