@@ -37,7 +37,7 @@ export function HeroSection() {
             className="section-title mt-6 text-4xl sm:text-5xl lg:text-6xl"
           >
             Back-in-stock alerts with a quieter kind of{' '}
-            <span className="text-gradient italic">leverage.</span>
+            <span className="text-gradient">leverage.</span>
           </motion.h1>
 
           <motion.p

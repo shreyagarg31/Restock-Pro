@@ -15,7 +15,7 @@
   --color-text-primary: #f4f4f5;
   --color-text-muted: #94a3b8;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -24,7 +24,7 @@
   }
 
   body {
-    @apply bg-base text-text-primary antialiased;
+    @apply bg-base font-sans text-text-primary antialiased;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -43,8 +43,8 @@
 }
 
 @layer utilities {
-  .font-serif {
-    font-family: var(--font-serif);
+  .font-display {
+    font-family: var(--font-display);
   }
 
   .text-gradient {
@@ -83,9 +83,15 @@
     --tw-prose-quotes: var(--color-text-muted);
   }
 
+  .prose-invert-custom :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
   /* Homepage typography scale */
   .section-title {
-    @apply font-serif text-3xl font-normal tracking-tight text-white sm:text-4xl;
+    @apply font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl;
   }
 
   .section-lead {
@@ -93,19 +99,19 @@
   }
 
   .page-title {
-    @apply font-serif text-4xl font-normal tracking-tight text-white sm:text-5xl;
+    @apply font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl;
   }
 
   .page-title-lg {
-    @apply font-serif text-4xl font-normal tracking-tight text-white sm:text-5xl lg:text-6xl;
+    @apply font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl;
   }
 
   .subsection-title {
-    @apply font-serif text-2xl font-normal text-white;
+    @apply font-display text-2xl font-semibold tracking-tight text-white;
   }
 
   .card-title {
-    @apply font-serif text-xl font-normal text-white;
+    @apply font-display text-xl font-semibold tracking-tight text-white;
   }
 
   .card-body {
@@ -117,7 +123,7 @@
   }
 
   .price-display {
-    @apply text-4xl font-extrabold tracking-tight text-white;
+    @apply font-display text-4xl font-bold tracking-tight text-white;
   }
 
   .text-meta {
@@ -129,6 +135,6 @@
   }
 
   .brand-wordmark {
-    @apply font-serif text-lg font-normal text-white;
+    @apply font-display text-lg font-semibold tracking-tight text-white;
   }
 }
