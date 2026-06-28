@@ -10,7 +10,8 @@ Built with **Astro 7**, **MDX Content Collections**, **Tailwind CSS v4**, and **
 |-------|-------------|
 | `/` | Homepage with hero, features, FAQ |
 | `/features` | Product feature deep-dive |
-| `/pricing` | Free beta pricing |
+| `/install` | How to install before App Store listing |
+| `/pricing` | Free at launch pricing |
 | `/blog` | Blog index |
 | `/blog/[slug]` | MDX blog posts |
 | `/privacy`, `/terms` | Legal pages |
@@ -123,7 +124,7 @@ Every `git push` to `main` triggers a production deploy via Workers Builds.
 
 Update [`src/lib/constants.ts`](src/lib/constants.ts):
 
-- `APP_INSTALL_URL` — Shopify App Store listing URL
+- `APP_INSTALL_URL` — Install page (`/install`) until Shopify App Store listing is published; then set the real listing URL (see TODO in constants)
 - `SITE_URL` — canonical domain (`https://www.restock-pro.com`)
 - `SUPPORT_EMAIL`
 

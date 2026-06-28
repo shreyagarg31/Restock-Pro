@@ -4,11 +4,11 @@ const features = [
   {
     title: 'Notify Me widget',
     description:
-      'Theme app extension on out-of-stock product pages. Customers subscribe in one click.',
+      'Theme app extension on out-of-stock pages. Customers expand, enter email, and join the waitlist in seconds.',
   },
   {
     title: 'Restock emails',
-    description: 'Automatic emails when inventory returns — powered by reliable delivery.',
+    description: 'Automatic emails when inventory returns — with unsubscribe built in.',
   },
   {
     title: 'Subscriber dashboard',
@@ -25,9 +25,9 @@ export function FeatureBento() {
     <section className="bg-base px-4 py-20 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
-          <h2 className="section-title">Everything you need to recover lost sales</h2>
+          <h2 className="section-title">Everything you need to capture back-in-stock demand</h2>
           <p className="section-lead mx-auto mt-4 max-w-2xl">
-            From storefront widget to automated emails — Restock Pro handles the full back-in-stock
+            From storefront widget to automatic emails — Restock Pro handles the full back-in-stock
             workflow.
           </p>
         </div>

@@ -27,7 +27,7 @@ export function HeroSection() {
             transition={{ duration: 0.5 }}
             className="inline-flex rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-1 text-xs font-medium text-brand-300"
           >
-            Free beta · Built for Shopify merchants
+            Free at launch · Built for Shopify merchants
           </motion.p>
 
           <motion.h1
@@ -56,7 +56,7 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mt-8 flex flex-col gap-4 sm:flex-row"
           >
-            <ShimmerButton href={APP_INSTALL_URL} external>
+            <ShimmerButton href={APP_INSTALL_URL}>
               Install on Shopify
             </ShimmerButton>
             <ShimmerButton href="/features" variant="outline">

@@ -14,7 +14,7 @@ const principles = [
   {
     icon: '◇',
     title: 'Earn customer trust',
-    desc: 'Automatic restock emails with unsubscribe built in. Reliable delivery.',
+    desc: 'Automatic restock emails with unsubscribe built in. Track every notification.',
   },
 ];
 

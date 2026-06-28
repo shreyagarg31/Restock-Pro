@@ -1,13 +1,15 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import InstallCTA from '@/components/InstallCTA.astro';
+import { ShimmerButton } from '@/components/react/ShimmerButton';
 import { ScrollReveal } from '@/components/react/ScrollReveal';
 import { buildMeta } from '@/lib/seo';
+import { APP_INSTALL_URL } from '@/lib/constants';
 
 const meta = buildMeta({
   title: 'Features',
   description:
-    'Notify Me widget, automated restock emails, subscriber dashboard, demand insights, and CSV exports for Shopify merchants.',
+    'Notify Me widget, automatic restock emails, subscriber dashboard, demand insights, past events, and CSV exports for Shopify merchants.',
   path: '/features',
 });
 
@@ -15,26 +17,82 @@ const features = [
   {
     title: 'Notify Me widget',
     description:
-      'A theme app extension that appears on out-of-stock product pages. Customers enter their email and subscribe in seconds — no account required.',
-    bullets: ['Matches your storefront theme', 'One-click theme editor setup', 'Works on mobile and desktop'],
+      'A theme app extension on out-of-stock product pages. Customers tap to expand, enter their email, and join the waitlist — no account required. Tracks the selected variant (size, color, and more).',
+    bullets: [
+      'Variant-aware waitlists',
+      'Customize colors, fonts, and button copy',
+      'Enable in the theme editor — no code',
+      'Works on mobile and desktop',
+    ],
+    image: '/screenshots/widget-collapsed.png',
+    imageAlt: 'Restock Pro Notify Me widget collapsed on a product page',
+    placeholderLabel: null,
   },
   {
-    title: 'Automated restock emails',
+    title: 'Automatic restock emails',
     description:
-      'When inventory returns, Restock Pro queues and sends notification emails automatically. No spreadsheets, no manual sends.',
-    bullets: ['Webhook-driven inventory detection', 'Reliable email delivery', 'Unsubscribe links included'],
+      'When inventory returns in Shopify, Restock Pro sends notification emails automatically. No spreadsheets, no manual sends.',
+    bullets: [
+      'Sends when stock is back',
+      'Unsubscribe link in every email',
+      'Customize subject, message, and CTA',
+    ],
+    image: null,
+    imageAlt: null,
+    placeholderLabel: 'Email preview',
   },
   {
     title: 'Subscriber management',
     description:
-      'View every customer waiting for a restock. Filter by product, export to CSV, and understand what your audience wants most.',
-    bullets: ['Centralized subscriber list', 'CSV export', 'Per-product demand view'],
+      'View every customer waiting for a restock. Filter by product, export your list, and see who is still waiting.',
+    bullets: [
+      'Centralized subscriber list',
+      'Export to CSV',
+      'Filter by product and status',
+    ],
+    image: null,
+    imageAlt: null,
+    placeholderLabel: 'Subscriber dashboard',
   },
   {
-    title: 'Demand analytics',
+    title: 'Dashboard',
     description:
-      'See which products generate the most back-in-stock interest. Use demand signals to inform purchasing and replenishment.',
-    bullets: ['Product-level interest tracking', 'Activity logs', 'Actionable restock insights'],
+      'See how your waitlist is growing, which products are most requested, and your capturable value at a glance.',
+    bullets: [
+      'Subscriber growth trends',
+      'Demand heatmap by day',
+      'Top requested products',
+      'Capturable value metric',
+    ],
+    image: null,
+    imageAlt: null,
+    placeholderLabel: 'Dashboard overview',
+  },
+  {
+    title: 'Demand insights',
+    description:
+      'Rank products by waitlist interest and potential value so you can restock what customers actually want.',
+    bullets: [
+      'Product leaderboard',
+      'Total capturable value',
+      'Plan replenishment with real demand data',
+    ],
+    image: null,
+    imageAlt: null,
+    placeholderLabel: 'Demand insights',
+  },
+  {
+    title: 'Past events',
+    description:
+      'Review notification and restock activity in one place. See what was sent, when, and whether it was delivered.',
+    bullets: [
+      'Email notification history',
+      'Restock activity timeline',
+      'Delivery status for each send',
+    ],
+    image: '/screenshots/widget-expanded.png',
+    imageAlt: 'Restock Pro widget expanded with email signup form',
+    placeholderLabel: null,
   },
 ];
 ---
@@ -44,8 +102,7 @@ const features = [
     <div class="mx-auto max-w-3xl text-center">
       <h1 class="page-title">Features</h1>
       <p class="section-lead mt-4">
-        Everything you need to capture demand during stockouts and convert it when inventory
-        returns.
+        Everything you need to capture demand during stockouts and follow up when inventory returns.
       </p>
     </div>
   </section>
@@ -68,8 +125,22 @@ const features = [
                   ))}
                 </ul>
               </div>
-              <div class="glass-card glow-brand p-8">
-                <div class="aspect-video rounded-xl bg-white/5" />
+              <div class="glass-card glow-brand overflow-hidden p-4">
+                {
+                  feature.image ? (
+                    <img
+                      src={feature.image}
+                      alt={feature.imageAlt ?? feature.title}
+                      class="aspect-video w-full rounded-xl object-cover object-top"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div class="flex aspect-video flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-white/5 px-6 text-center">
+                      <span class="text-sm font-medium text-text-muted">{feature.placeholderLabel}</span>
+                      <span class="mt-2 text-xs text-text-muted/70">Screenshot coming soon</span>
+                    </div>
+                  )
+                }
               </div>
             </article>
           </ScrollReveal>

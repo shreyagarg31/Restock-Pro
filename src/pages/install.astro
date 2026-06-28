@@ -1,0 +1,80 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import InstallCTA from '@/components/InstallCTA.astro';
+import { ShimmerButton } from '@/components/react/ShimmerButton';
+import { buildMeta } from '@/lib/seo';
+
+const APP_URL = 'https://restock-pro.com';
+
+const meta = buildMeta({
+  title: 'Install Restock Pro',
+  description:
+    'Install Restock Pro on your Shopify store. Free at launch with full access to back-in-stock alerts, demand insights, and exports.',
+  path: '/install',
+});
+---
+
+<BaseLayout {...meta}>
+  <section class="border-b hairline px-4 py-20 sm:px-6">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="page-title">Install Restock Pro</h1>
+      <p class="section-lead mt-4">
+        Free at launch with full access. Shopify App Store listing coming soon — use the steps below
+        to get started today.
+      </p>
+    </div>
+  </section>
+
+  <section class="px-4 py-16 sm:px-6">
+    <div class="mx-auto max-w-2xl space-y-8">
+      <div class="glass-card p-8">
+        <h2 class="subsection-title">1. Install the app</h2>
+        <p class="body-text mt-3">
+          Open Restock Pro from your Shopify admin or use your install link from the Shopify Partner
+          dashboard.
+        </p>
+        <div class="mt-6">
+          <ShimmerButton client:visible href={APP_URL} external class="!px-6 !py-3">
+            Open Restock Pro
+          </ShimmerButton>
+        </div>
+      </div>
+
+      <div class="glass-card p-8">
+        <h2 class="subsection-title">2. Enable the Notify Me widget</h2>
+        <p class="body-text mt-3">
+          In Shopify, go to <strong>Online Store → Themes → Customize</strong>, open the theme
+          editor, and turn on the Restock Pro app embed on product pages.
+        </p>
+        <p class="body-text mt-3">
+          <a href="/blog/how-to-add-back-in-stock-notifications-shopify" class="text-link">
+            Read the full setup guide
+          </a>
+        </p>
+      </div>
+
+      <div class="glass-card p-8">
+        <h2 class="subsection-title">3. Customize and go live</h2>
+        <p class="body-text mt-3">
+          Use the in-app Get Started guide to customize your widget and email copy, then test a
+          subscription on a sold-out product.
+        </p>
+        <p class="body-text mt-3">
+          <a href="/blog/shopify-notify-me-button-setup-guide" class="text-link">
+            Widget setup guide
+          </a>
+        </p>
+      </div>
+
+      <p class="card-body text-center text-text-muted">
+        Questions? Email us at
+        <a href="mailto:hello@restock-pro.com" class="text-link">hello@restock-pro.com</a>.
+      </p>
+    </div>
+  </section>
+
+  <InstallCTA
+    title="Ready to capture demand?"
+    description="Everything is included free at launch while we grow with early merchants."
+  />
+</BaseLayout>
