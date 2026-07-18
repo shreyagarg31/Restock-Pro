@@ -1,10 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import InstallCTA from '@/components/InstallCTA.astro';
-import { ShimmerButton } from '@/components/react/ShimmerButton';
 import { ScrollReveal } from '@/components/react/ScrollReveal';
 import { buildMeta } from '@/lib/seo';
-import { APP_INSTALL_URL } from '@/lib/constants';
 
 const meta = buildMeta({
   title: 'Features',
@@ -17,16 +15,19 @@ const features = [
   {
     title: 'Notify Me widget',
     description:
-      'A theme app extension on out-of-stock product pages. Customers tap to expand, enter their email, and join the waitlist — no account required. Tracks the selected variant (size, color, and more).',
+      'A theme app extension on out-of-stock product pages. Customers expand the form, enter their email, and join the waitlist — no account required. Tracks the selected variant (size, color, and more).',
     bullets: [
       'Variant-aware waitlists',
       'Customize colors, fonts, and button copy',
       'Enable in the theme editor — no code',
       'Works on mobile and desktop',
     ],
-    image: '/screenshots/widget-collapsed.png',
-    imageAlt: 'Restock Pro Notify Me widget collapsed on a product page',
-    placeholderLabel: null,
+    images: [
+      {
+        src: '/screenshots/feature-widget.png',
+        alt: 'Notify Me form on an out-of-stock headphones product page',
+      },
+    ],
   },
   {
     title: 'Automatic restock emails',
@@ -37,9 +38,12 @@ const features = [
       'Unsubscribe link in every email',
       'Customize subject, message, and CTA',
     ],
-    image: null,
-    imageAlt: null,
-    placeholderLabel: 'Email preview',
+    images: [
+      {
+        src: '/screenshots/feature-email.png',
+        alt: 'Back-in-stock email for AeroPulse headphones with Shop Now button',
+      },
+    ],
   },
   {
     title: 'Subscriber management',
@@ -50,49 +54,65 @@ const features = [
       'Export to CSV',
       'Filter by product and status',
     ],
-    image: null,
-    imageAlt: null,
-    placeholderLabel: 'Subscriber dashboard',
+    images: [
+      {
+        src: '/screenshots/feature-subscribers.png',
+        alt: 'Subscribers page with search, status filter, and product waitlists',
+      },
+    ],
   },
   {
     title: 'Dashboard',
     description:
-      'See how your waitlist is growing, which products are most requested, and your capturable value at a glance.',
+      'See how your waitlist is growing, demand by day, and capturable value at a glance.',
     bullets: [
       'Subscriber growth trends',
       'Demand heatmap by day',
-      'Top requested products',
+      'Notifications and successful restocks',
       'Capturable value metric',
     ],
-    image: null,
-    imageAlt: null,
-    placeholderLabel: 'Dashboard overview',
+    images: [
+      {
+        src: '/screenshots/feature-dashboard.png',
+        alt: 'Dashboard overview with metrics, growth chart, and demand heatmap',
+      },
+    ],
   },
   {
     title: 'Demand insights',
     description:
       'Rank products by waitlist interest and potential value so you can restock what customers actually want.',
     bullets: [
-      'Product leaderboard',
       'Total capturable value',
-      'Plan replenishment with real demand data',
+      'Highest demand product highlight',
+      'Full product leaderboard with demand meter',
     ],
-    image: null,
-    imageAlt: null,
-    placeholderLabel: 'Demand insights',
+    images: [
+      {
+        src: '/screenshots/feature-demand-summary.png',
+        alt: 'Demand Intelligence with total capturable value and highest demand product',
+      },
+      {
+        src: '/screenshots/feature-demand-leaderboard.png',
+        alt: 'Demand leaderboard ranking products by subscribers and potential revenue',
+      },
+    ],
   },
   {
     title: 'Past events',
     description:
-      'Review notification and restock activity in one place. See what was sent, when, and whether it was delivered.',
+      'Review outbound email delivery in one place. See what was sent, when, and whether it was delivered, bounced, or failed.',
     bullets: [
       'Email notification history',
-      'Restock activity timeline',
       'Delivery status for each send',
+      'Provider and timestamp for every event',
     ],
-    image: '/screenshots/widget-expanded.png',
-    imageAlt: 'Restock Pro widget expanded with email signup form',
-    placeholderLabel: null,
+    images: [
+      {
+        src: '/screenshots/feature-events.png',
+        alt: 'Event History table with delivered, failed, and bounced email statuses',
+      },
+    ],
   },
 ];
 ---
@@ -112,7 +132,12 @@ const features = [
       {
         features.map((feature, i) => (
           <ScrollReveal client:visible delay={i * 0.05}>
-            <article class:list={['grid gap-8 md:grid-cols-2 md:items-center', i % 2 === 1 && 'md:[&>*:first-child]:order-2']}>
+            <article
+              class:list={[
+                'grid gap-8 md:grid-cols-2 md:items-center',
+                i % 2 === 1 && 'md:[&>*:first-child]:order-2',
+              ]}
+            >
               <div>
                 <h2 class="subsection-title">{feature.title}</h2>
                 <p class="body-text mt-3">{feature.description}</p>
@@ -125,22 +150,17 @@ const features = [
                   ))}
                 </ul>
               </div>
-              <div class="glass-card glow-brand overflow-hidden p-4">
-                {
-                  feature.image ? (
+              <div class="glass-card glow-brand space-y-3 overflow-hidden p-4">
+                {feature.images.map((img) => (
+                  <div class="overflow-hidden rounded-xl border border-white/10 bg-[#f5f5f5]">
                     <img
-                      src={feature.image}
-                      alt={feature.imageAlt ?? feature.title}
-                      class="aspect-video w-full rounded-xl object-cover object-top"
+                      src={img.src}
+                      alt={img.alt}
+                      class="h-auto w-full object-contain object-top"
                       loading="lazy"
                     />
-                  ) : (
-                    <div class="flex aspect-video flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-white/5 px-6 text-center">
-                      <span class="text-sm font-medium text-text-muted">{feature.placeholderLabel}</span>
-                      <span class="mt-2 text-xs text-text-muted/70">Screenshot coming soon</span>
-                    </div>
-                  )
-                }
+                  </div>
+                ))}
               </div>
             </article>
           </ScrollReveal>
